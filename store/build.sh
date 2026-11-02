@@ -7,7 +7,8 @@
 #   store/build.sh zip        package the extension zip only
 #
 # Screenshots: every store/screenshots/<name>.html is rendered at 1280x800 to
-# store/screenshot-<name>.png using Playwright's CLI via npx (needs Node; the
+# store/screenshot-<name>.png, and every store/promo/<name>-<W>x<H>.html at
+# WxH to store/promo-<name>-<W>x<H>.png, using Playwright's CLI via npx (needs Node; the
 # first run downloads Chromium). Nothing is installed into the repo, which
 # matters because this folder is also loaded as the unpacked extension.
 set -euo pipefail
@@ -23,6 +24,14 @@ shots() {
     name="$(basename "$page" .html)"
     out="store/screenshot-$name.png"
     npx -y "$PLAYWRIGHT" screenshot --viewport-size=1280,800 \
+      "file://$ROOT/$page" "$out" >/dev/null
+    echo "rendered $out"
+  done
+  for page in store/promo/*.html; do
+    name="$(basename "$page" .html)"            # e.g. small-440x280
+    size="${name##*-}"; w="${size%x*}"; h="${size#*x}"
+    out="store/promo-$name.png"
+    npx -y "$PLAYWRIGHT" screenshot --viewport-size="$w,$h" \
       "file://$ROOT/$page" "$out" >/dev/null
     echo "rendered $out"
   done

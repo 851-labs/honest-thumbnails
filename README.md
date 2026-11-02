@@ -29,6 +29,7 @@ MIT, see [LICENSE](LICENSE). Privacy policy: [PRIVACY.md](PRIVACY.md).
 Everything for the store listing lives in `store/`:
 
 - `store/screenshots/*.html`: the screenshots, each a 1280×800 HTML page (shared styles in `shared.css`, images in `assets/`). Edit these to change the text or layout.
+- `store/promo/*.html`: the promo tile(s); the file name carries the size, e.g. `small-440x280.html`.
 - `store/capture.cjs`: loads the extension in headless Chromium and captures youtube.com/@MrBeast/videos with the extension off and on (plus the popup in each state) into `store/screenshots/assets/`. Screenshots 2 and 3 are built from these.
 - `store/build.sh`: renders each page to `store/screenshot-<name>.png` with Playwright and packages the extension zip. It needs Node; the first run downloads Chromium.
 
