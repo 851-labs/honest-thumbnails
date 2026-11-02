@@ -1,5 +1,5 @@
 // Captures live YouTube pages with the extension turned off and on, for the
-// store screenshots. Run via `store/build.sh capture` (it supplies Playwright).
+// store screenshots. Run via `store/build.sh capture` or `npm run capture`.
 //
 // Writes to store/screenshots/assets/:
 //   channel-off.png / channel-on.png   the channel's Videos tab, extension off / on
@@ -9,11 +9,12 @@ const crypto = require("crypto");
 const { chromium } = require("playwright");
 
 const ROOT = path.resolve(__dirname, "..");
+const EXT = path.join(ROOT, "extension");
 const OUT = path.join(ROOT, "store/screenshots/assets");
 const CHANNEL = "https://www.youtube.com/@MrBeast/videos";
 
 // Chrome derives an unpacked extension's ID from its absolute path.
-const extensionId = [...crypto.createHash("sha256").update(ROOT).digest("hex").slice(0, 32)]
+const extensionId = [...crypto.createHash("sha256").update(EXT).digest("hex").slice(0, 32)]
   .map((c) => String.fromCharCode(97 + parseInt(c, 16)))
   .join("");
 
@@ -30,7 +31,7 @@ async function setEnabled(popup, enabled) {
     locale: "en-US",
     viewport: { width: 1280, height: 860 },
     deviceScaleFactor: 2,
-    args: [`--disable-extensions-except=${ROOT}`, `--load-extension=${ROOT}`],
+    args: [`--disable-extensions-except=${EXT}`, `--load-extension=${EXT}`],
   });
 
   const popup = await ctx.newPage();
