@@ -1,0 +1,64 @@
+/* Shared styles for Chrome Web Store screenshots (rendered at 1280x800). */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f7f9;
+  --ink: #141418;
+  --muted: #5f5f69;
+  --amber: #ffb020;
+  --charcoal: #181a20;
+  --chip: #e4e5e9;
+}
+
+html, body { width: 1280px; height: 800px; overflow: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Logo + title + one-line subheader */
+.header { display: flex; align-items: center; gap: 20px; }
+.header img { width: 84px; height: 84px; }
+.header h1 { font-size: 46px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.1; }
+.header p { margin-top: 8px; font-size: 25px; color: var(--muted); }
+
+/* Before / after pair */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 52px; }
+.label {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 24px;
+  font-weight: 700;
+}
+.label.before { background: var(--chip); color: var(--muted); }
+.label.after { background: var(--amber); color: var(--charcoal); }
+
+/* A YouTube-style thumbnail */
+.thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.thumb .duration {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
