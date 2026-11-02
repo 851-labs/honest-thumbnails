@@ -8,7 +8,7 @@ Honest Thumbnails is a Chrome extension that replaces YouTube's uploader-chosen 
 
 ## Install
 
-- **Chrome Web Store:** in review. The link will be added here once it's live.
+- **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/honest-thumbnails/kocjpadfddegoogneldhlkiibopgdphk)** (recommended)
 - **From source:**
   1. Clone this repo.
   2. Open `chrome://extensions` and turn on **Developer mode**.
