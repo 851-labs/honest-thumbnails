@@ -1,7 +1,5 @@
 # Honest Thumbnails
 
-**See what's actually in the video, not the clickbait.**
-
 Honest Thumbnails is a Chrome extension that replaces YouTube's uploader-chosen thumbnails with a real frame from the middle of each video.
 
 <a href="https://chromewebstore.google.com/detail/honest-thumbnails/kocjpadfddegoogneldhlkiibopgdphk"><img src=".github/chrome-web-store-badge.png" alt="Available in the Chrome Web Store" width="206"></a>
