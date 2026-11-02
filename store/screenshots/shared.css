@@ -62,3 +62,49 @@ body {
   font-size: 16px;
   font-weight: 600;
 }
+
+/* Header variant with a status pill next to the title (screenshots 2 and 3) */
+.header h1 .label { margin: 0 0 0 14px; vertical-align: middle; font-size: 22px; }
+
+/* A browser window that bleeds off the bottom edge */
+body.window-shot { justify-content: flex-start; padding-top: 52px; }
+.window {
+  position: relative;
+  margin-top: 36px;
+  height: 640px;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.window .toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 46px;
+  padding: 0 16px;
+  background: #eef0f3;
+  border-bottom: 1px solid #dcdfe4;
+}
+.window .dots { display: flex; gap: 8px; }
+.window .dots i { width: 12px; height: 12px; border-radius: 50%; background: #d4d7dc; }
+.window .url {
+  flex: 1;
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 15px;
+  background: #fff;
+  color: #555b66;
+  font-size: 15px;
+  line-height: 30px;
+}
+.window .ext { width: 24px; height: 24px; }
+.window .page { display: block; width: 100%; }
+.window .popup {
+  position: absolute;
+  top: 44px;
+  right: 10px;
+  width: 272px;
+  border-radius: 12px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}

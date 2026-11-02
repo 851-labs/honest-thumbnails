@@ -2,6 +2,7 @@
 # Builds Chrome Web Store assets.
 #
 #   store/build.sh            render screenshots + package the extension zip
+#   store/build.sh capture    re-capture live YouTube pages used by the screenshots
 #   store/build.sh shots      render screenshots only
 #   store/build.sh zip        package the extension zip only
 #
@@ -27,6 +28,18 @@ shots() {
   done
 }
 
+capture() {
+  # The capture script needs Playwright as a library. Install it into a cache
+  # outside the repo (never node_modules here: this folder is the extension).
+  cache="${XDG_CACHE_HOME:-$HOME/.cache}/honest-thumbnails-build"
+  if [ ! -d "$cache/node_modules/playwright" ]; then
+    mkdir -p "$cache"
+    npm install --prefix "$cache" --silent --no-save "$PLAYWRIGHT" >/dev/null
+  fi
+  npx -y "$PLAYWRIGHT" install chromium >/dev/null 2>&1
+  NODE_PATH="$cache/node_modules" node store/capture.cjs
+}
+
 zip_ext() {
   version="$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' manifest.json)"
   out="store/honest-thumbnails-$version.zip"
@@ -37,7 +50,8 @@ zip_ext() {
 
 case "$what" in
   all) shots; zip_ext ;;
+  capture) capture ;;
   shots) shots ;;
   zip) zip_ext ;;
-  *) echo "usage: $0 [all|shots|zip]" >&2; exit 1 ;;
+  *) echo "usage: $0 [all|capture|shots|zip]" >&2; exit 1 ;;
 esac
