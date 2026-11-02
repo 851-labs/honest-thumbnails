@@ -4,17 +4,9 @@
 
 Honest Thumbnails is a Chrome extension that replaces YouTube's uploader-chosen thumbnails with a real frame from the middle of each video.
 
+<a href="https://chromewebstore.google.com/detail/honest-thumbnails/kocjpadfddegoogneldhlkiibopgdphk"><img src=".github/chrome-web-store-badge.png" alt="Available in the Chrome Web Store" width="206"></a>
+
 ![Before and after: a clickbait thumbnail next to a real frame from the same video](store/screenshot-1-before-after.png)
-
-## Install
-
-- **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/honest-thumbnails/kocjpadfddegoogneldhlkiibopgdphk)** (recommended)
-- **From source:**
-  1. Clone this repo.
-  2. Open `chrome://extensions` and turn on **Developer mode**.
-  3. Click **Load unpacked** and select the repo folder.
-
-Click the toolbar icon to turn the extension on or off, or to pick an **Early**, **Middle** or **Late** frame.
 
 ## What it looks like
 
