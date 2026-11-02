@@ -22,4 +22,4 @@ Click the toolbar icon to turn it on or off, or to choose the Early / Middle / L
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE). Privacy policy: [PRIVACY.md](PRIVACY.md).
