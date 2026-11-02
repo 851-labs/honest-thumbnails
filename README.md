@@ -49,10 +49,6 @@ Honest Thumbnails finds each thumbnail on the page and swaps it for the chosen f
 
 No account, no analytics, no tracking. The extension never sends data anywhere. It only loads images from YouTube's own image server, and it only stores your on/off setting and frame choice. It runs only on YouTube. See [PRIVACY.md](PRIVACY.md).
 
-## Development
-
-See [DEVELOPMENT.md](DEVELOPMENT.md) for the project layout, how the store screenshots are built, and how to release an update.
-
 ## License
 
 [MIT](LICENSE) © 851 Labs
