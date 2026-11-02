@@ -18,8 +18,6 @@ Click the toolbar icon to turn the extension on or off, or to pick an **Early**,
 
 ## What it looks like
 
-The same channel, with the extension off and on:
-
 ![MrBeast's channel with the extension off: the uploaded thumbnails](store/screenshot-2-extension-off.png)
 
 ![The same channel with the extension on: a real frame from each video](store/screenshot-3-extension-on.png)
