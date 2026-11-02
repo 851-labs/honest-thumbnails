@@ -1,0 +1,9 @@
+/* hq1/hq2/hq3 frames are 4:3 with letterbox bars; crop them away. */
+img[data-honest] {
+  object-fit: cover !important;
+}
+
+[data-honest-bg] {
+  background-size: cover !important;
+  background-position: center !important;
+}

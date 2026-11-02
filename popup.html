@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font: 13px/1.4 system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 14px 16px 16px;
+      width: 240px;
+    }
+    h1 { font-size: 14px; margin: 0 0 2px; }
+    p { margin: 0 0 14px; opacity: 0.7; font-size: 12px; }
+    .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .label { font-weight: 500; }
+    .seg { display: flex; border: 1px solid #8884; border-radius: 8px; overflow: hidden; }
+    .seg button {
+      flex: 1; border: 0; background: transparent; color: inherit;
+      font: inherit; padding: 6px 0; cursor: pointer;
+    }
+    .seg button + button { border-left: 1px solid #8884; }
+    .seg button[aria-pressed="true"] { background: #e33; color: #fff; }
+    .seg.disabled { opacity: 0.4; pointer-events: none; }
+    /* toggle switch */
+    .switch { position: relative; width: 34px; height: 20px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: #8886; border-radius: 20px;
+      cursor: pointer;
+    }
+    .slider::before {
+      content: ""; position: absolute; width: 16px; height: 16px; left: 2px; top: 2px;
+      background: #fff; border-radius: 50%;
+    }
+    .ready .slider, .ready .slider::before { transition: background 0.15s, transform 0.15s; }
+    .switch input:checked + .slider { background: #e33; }
+    .switch input:checked + .slider::before { transform: translateX(14px); }
+  </style>
+</head>
+<body>
+  <h1>Honest Thumbnails</h1>
+  <p>Show a real frame from the video instead of the uploader's thumbnail.</p>
+
+  <div class="row">
+    <span class="label">Enabled</span>
+    <label class="switch">
+      <input type="checkbox" id="enabled" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="label" style="margin-bottom: 6px">Frame</div>
+  <div class="seg" id="frame">
+    <button data-frame="1">Early</button>
+    <button data-frame="2">Middle</button>
+    <button data-frame="3">Late</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
