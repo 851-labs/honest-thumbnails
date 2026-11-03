@@ -7,3 +7,8 @@ store/icon-f3-vs-f5.png
 store/shot1/
 store/icon-bang-nudge*
 node_modules/
+store/app-icon-options*
+xcuserdata/
+*.xcuserstate
+build/
+DerivedData/
