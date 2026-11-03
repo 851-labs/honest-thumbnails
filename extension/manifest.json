@@ -1,9 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Honest Thumbnails",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Replaces YouTube's clickbait thumbnails with a real frame from the middle of the video.",
   "permissions": ["storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{1f0c4a5e-5b7e-4f1a-9d3c-6a8e2b7c4d10}",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",

@@ -2,9 +2,11 @@
 // auto-generated frame from the video itself.
 //
 // YouTube auto-generates three frames per video at roughly 25% / 50% / 75%:
+//   i.ytimg.com/vi/<id>/{1,2,3}.jpg         120x90, always present (letterboxed)
 //   i.ytimg.com/vi/<id>/hq{1,2,3}.jpg       480x360, always present (letterboxed)
 //   i.ytimg.com/vi/<id>/maxres{1,2,3}.jpg   1280x720, present for HD videos
-// We prefer maxresN and fall back to hqN.
+// We prefer maxresN and fall back to hqN. In Auto mode the 120x90 frames are
+// used to choose N.
 (() => {
   "use strict";
 
@@ -35,11 +37,80 @@
     });
   }
 
+  // ---- Auto frame pick ----------------------------------------------------
+  //
+  // Frame 0 means "Auto": use the middle frame unless it's mostly empty (a black
+  // screen, a title card), and then the early or late frame if it's clearly
+  // better. The 120x90 frames at /vi/<id>/{1,2,3}.jpg are ~2 KB and served with
+  // CORS headers, so we can read their pixels. We split the picture into a grid
+  // and count the cells with real detail.
+
+  const GRID_COLS = 8;
+  const GRID_ROWS = 4;
+  const CELL = 15; // 8x4 cells of 15x16 px cover the 120x64 band inside the letterbox
+  const CELL_H = 16;
+  const TOP = 13; // the 4:3 frames have ~11 px letterbox bars above and below
+  const BUSY_STDDEV = 12; // luma standard deviation that counts as "detail"
+  const EMPTY = 0.4; // below this fraction of detailed cells, a frame is "empty"
+  const MARGIN = 0.2; // how much better another frame must be to replace it
+
+  let canvas;
+
+  function loadPixels(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        canvas ??= new OffscreenCanvas(120, 90).getContext("2d", { willReadFrequently: true });
+        canvas.drawImage(img, 0, 0, 120, 90);
+        resolve(canvas.getImageData(0, 0, 120, 90).data);
+      };
+      img.onerror = () => resolve(null);
+      img.src = url;
+    });
+  }
+
+  // Fraction of grid cells whose luma varies enough to hold detail (0..1).
+  function busyness(px) {
+    let busy = 0;
+    for (let row = 0; row < GRID_ROWS; row++) {
+      for (let col = 0; col < GRID_COLS; col++) {
+        let sum = 0;
+        let sq = 0;
+        for (let y = TOP + row * CELL_H; y < TOP + (row + 1) * CELL_H; y++) {
+          for (let x = col * CELL; x < (col + 1) * CELL; x++) {
+            const i = (y * 120 + x) * 4;
+            const luma = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+            sum += luma;
+            sq += luma * luma;
+          }
+        }
+        const n = CELL * CELL_H;
+        const mean = sum / n;
+        if (Math.sqrt(sq / n - mean * mean) > BUSY_STDDEV) busy++;
+      }
+    }
+    return busy / (GRID_COLS * GRID_ROWS);
+  }
+
+  async function pickFrame(id) {
+    const score = async (frame) => {
+      const px = await loadPixels(`${ORIGIN}/vi/${id}/${frame}.jpg`);
+      return px ? busyness(px) : -1;
+    };
+    const middle = await score(2);
+    if (middle >= EMPTY) return 2;
+    const [early, late] = await Promise.all([score(1), score(3)]);
+    const best = early >= late ? 1 : 3;
+    return Math.max(early, late) >= middle + MARGIN ? best : 2;
+  }
+
   function resolveFrame(id, frame) {
     const key = `${id}:${frame}`;
     let promise = cache.get(key);
     if (!promise) {
       promise = (async () => {
+        if (frame === 0) frame = await pickFrame(id);
         for (const name of [`maxres${frame}`, `hq${frame}`]) {
           const url = `${ORIGIN}/vi/${id}/${name}.jpg`;
           if (await probe(url)) return url;
