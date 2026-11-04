@@ -35,6 +35,14 @@ shots() {
     npx playwright screenshot --viewport-size="$w,$h" "file://$ROOT/$page" "$out" >/dev/null
     echo "rendered $out"
   done
+  # App Store screenshots: store/appstore/<name>-<W>x<H>.html -> store/appstore/<name>-<W>x<H>.png
+  for page in store/appstore/*.html; do
+    name="$(basename "$page" .html)"
+    size="${name##*-}"; w="${size%x*}"; h="${size#*x}"
+    out="store/appstore/$name.png"
+    npx playwright screenshot --viewport-size="$w,$h" "file://$ROOT/$page" "$out" >/dev/null
+    echo "rendered $out"
+  done
 }
 
 capture() {
