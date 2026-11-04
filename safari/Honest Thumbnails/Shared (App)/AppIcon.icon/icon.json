@@ -1,77 +1,77 @@
 {
-  "fill": {
-    "solid": "srgb:0.20392,0.21961,0.25882,1.00000"
+  "fill" : {
+    "solid" : "srgb:0.20392,0.21961,0.25882,1.00000"
   },
-  "groups": [
+  "groups" : [
     {
-      "name": "Slash",
-      "layers": [
+      "layers" : [
         {
-          "name": "slash",
-          "image-name": "slash.png",
-          "glass": true
+          "glass" : true,
+          "image-name" : "slash.png",
+          "name" : "slash"
         }
       ],
-      "shadow": {
-        "kind": "neutral",
-        "opacity": 0.5
+      "name" : "Slash",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
       },
-      "translucency": {
-        "enabled": true,
-        "value": 0.3
-      },
-      "specular": true
+      "specular" : true,
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
     },
     {
-      "name": "Details",
-      "layers": [
+      "layers" : [
         {
-          "name": "exclamation",
-          "image-name": "exclamation.png",
-          "glass": false
+          "glass" : true,
+          "image-name" : "exclamation.png",
+          "name" : "exclamation"
         },
         {
-          "name": "mountains",
-          "image-name": "mountains.png",
-          "glass": true
+          "glass" : true,
+          "image-name" : "mountains.png",
+          "name" : "mountains"
         }
       ],
-      "shadow": {
-        "kind": "neutral",
-        "opacity": 0.5
+      "name" : "Details",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
       },
-      "translucency": {
-        "enabled": false,
-        "value": 0.3
-      },
-      "specular": true
+      "specular" : true,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.3
+      }
     },
     {
-      "name": "Thumbnail",
-      "layers": [
+      "layers" : [
         {
-          "name": "amber-half",
-          "image-name": "amber-half.png",
-          "glass": false
+          "glass" : true,
+          "image-name" : "amber-half.png",
+          "name" : "amber-half"
         },
         {
-          "name": "picture-half",
-          "image-name": "picture-half.png",
-          "glass": false
+          "glass" : true,
+          "image-name" : "picture-half.png",
+          "name" : "picture-half"
         }
       ],
-      "shadow": {
-        "kind": "neutral",
-        "opacity": 0.5
+      "name" : "Thumbnail",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
       },
-      "translucency": {
-        "enabled": false,
-        "value": 0.5
-      },
-      "specular": false
+      "specular" : false,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
     }
   ],
-  "supported-platforms": {
-    "squares": "shared"
+  "supported-platforms" : {
+    "squares" : "shared"
   }
 }
