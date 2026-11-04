@@ -10,20 +10,26 @@ function render({ enabled, frame }) {
   }
 }
 
+let state = { ...DEFAULTS };
+
 chrome.storage.sync.get(DEFAULTS, (settings) => {
-  render(settings);
+  state = settings;
+  render(state);
   // Enable switch animation only after the initial state is painted.
   requestAnimationFrame(() => document.body.classList.add("ready"));
 });
 
-enabledEl.addEventListener("change", () => {
-  chrome.storage.sync.set({ enabled: enabledEl.checked });
-  chrome.storage.sync.get(DEFAULTS, render);
-});
+// Update the popup right away and save in the background. Waiting on a storage
+// round trip before redrawing made Safari lag a click behind.
+function update(change) {
+  state = { ...state, ...change };
+  render(state);
+  chrome.storage.sync.set(change);
+}
+
+enabledEl.addEventListener("change", () => update({ enabled: enabledEl.checked }));
 
 frameEl.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
-  if (!btn) return;
-  chrome.storage.sync.set({ frame: Number(btn.dataset.frame) });
-  chrome.storage.sync.get(DEFAULTS, render);
+  if (btn) update({ frame: Number(btn.dataset.frame) });
 });
