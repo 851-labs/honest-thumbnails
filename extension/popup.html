@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root { color-scheme: light dark; }
     body {
@@ -36,6 +37,14 @@
     .ready .slider, .ready .slider::before { transition: background 0.15s, transform 0.15s; }
     .switch input:checked + .slider { background: #ffb020; }
     .switch input:checked + .slider::before { transform: translateX(14px); }
+    /* Touch screens (Safari on iPhone/iPad shows the popup as a sheet): fill the
+       width and use larger controls. Desktop popups keep the fixed 240px size. */
+    @media (pointer: coarse) {
+      body { width: auto; max-width: 480px; margin: 0 auto; padding: 8px 20px 20px; font-size: 17px; }
+      h1 { font-size: 17px; }
+      p { font-size: 15px; }
+      .seg button { padding: 11px 0; }
+    }
   </style>
 </head>
 <body>
