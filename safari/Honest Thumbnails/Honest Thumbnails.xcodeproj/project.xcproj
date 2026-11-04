@@ -22,6 +22,12 @@
             "Honest Thumbnails (macOS)/compile-sources",
           ],
         }, {
+          "path": "AppIcon.icon",
+          "target-membership": [
+            "Honest Thumbnails (iOS)/resources",
+            "Honest Thumbnails (macOS)/resources",
+          ],
+        }, {
           "path": "Assets.xcassets",
           "target-membership": [
             "Honest Thumbnails (iOS)/resources",
