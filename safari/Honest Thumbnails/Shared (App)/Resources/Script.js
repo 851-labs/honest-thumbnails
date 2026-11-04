@@ -1,19 +1,16 @@
 function show(platform, enabled, useSettingsInsteadOfPreferences) {
     document.body.classList.add(`platform-${platform}`);
 
-    if (useSettingsInsteadOfPreferences) {
-        document.getElementsByClassName('platform-mac state-on')[0].innerText = "Honest Thumbnails’s extension is currently on. You can turn it off in the Extensions section of Safari Settings.";
-        document.getElementsByClassName('platform-mac state-off')[0].innerText = "Honest Thumbnails’s extension is currently off. You can turn it on in the Extensions section of Safari Settings.";
-        document.getElementsByClassName('platform-mac state-unknown')[0].innerText = "You can turn on Honest Thumbnails’s extension in the Extensions section of Safari Settings.";
-        document.getElementsByClassName('platform-mac open-preferences')[0].innerText = "Quit and Open Safari Settings…";
+    // macOS 12 still calls it "Safari Preferences".
+    if (platform === "mac" && useSettingsInsteadOfPreferences === false) {
+        for (const el of document.querySelectorAll(".settings-name")) el.textContent = "Safari Preferences";
     }
 
     if (typeof enabled === "boolean") {
-        document.body.classList.toggle(`state-on`, enabled);
-        document.body.classList.toggle(`state-off`, !enabled);
+        document.body.classList.toggle("state-on", enabled);
+        document.body.classList.toggle("state-off", !enabled);
     } else {
-        document.body.classList.remove(`state-on`);
-        document.body.classList.remove(`state-off`);
+        document.body.classList.remove("state-on", "state-off");
     }
 }
 

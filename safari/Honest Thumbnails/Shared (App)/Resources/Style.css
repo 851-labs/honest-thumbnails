@@ -6,56 +6,67 @@
 
 :root {
     color-scheme: light dark;
-
-    --spacing: 20px;
+    --amber: #ffb020;
+    --muted: color-mix(in srgb, currentColor 60%, transparent);
 }
 
-html {
-    height: 100%;
-}
+html { height: 100%; }
 
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-
-    gap: var(--spacing);
-    margin: 0 calc(var(--spacing) * 2);
+    gap: 14px;
     height: 100%;
-
-    font: -apple-system-short-body;
+    margin: 0 40px;
+    font: -apple-system-body;
     text-align: center;
 }
 
-body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) {
-    display: none;
+.icon { width: 112px; height: 112px; margin-bottom: 4px; }
+h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.3px; }
+.tagline { margin: 0; max-width: 340px; color: var(--muted); }
+
+.steps {
+    margin: 8px 0 0;
+    padding: 0;
+    max-width: 360px;
+    list-style: none;
+    counter-reset: step;
+    text-align: left;
+}
+.steps li {
+    position: relative;
+    margin: 10px 0;
+    padding-left: 34px;
+    counter-increment: step;
+    line-height: 1.35;
+}
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: #181a20;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
 }
 
-body.platform-ios .platform-mac {
-    display: none;
-}
+.status { margin: 8px 0 0; max-width: 340px; font-weight: 600; }
 
-body.platform-mac .platform-ios {
-    display: none;
-}
+button { margin-top: 6px; font-size: 1em; }
 
-body.platform-ios .platform-mac {
-    display: none;
-}
-
-body:not(.state-on, .state-off) :is(.state-on, .state-off) {
-    display: none;
-}
-
-body.state-on :is(.state-off, .state-unknown) {
-    display: none;
-}
-
-body.state-off :is(.state-on, .state-unknown) {
-    display: none;
-}
-
-button {
-    font-size: 1em;
-}
+/* Platform and state visibility (classes set by Script.js) */
+body:not(.platform-mac, .platform-ios) :is(.platform-mac, .platform-ios) { display: none; }
+body.platform-ios .platform-mac { display: none; }
+body.platform-mac .platform-ios { display: none; }
+body.platform-mac.state-on .steps.platform-mac { display: none; }
+body.platform-mac.state-on .open-preferences { display: none; }
+body.platform-mac:not(.state-on) .status { display: none; }
