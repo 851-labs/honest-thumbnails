@@ -6,11 +6,13 @@ The extension lives in `extension/` and has no build step. To work on it:
 2. Click **Load unpacked** and select the `extension/` folder.
 3. Edit the files, then click reload on the extension's card to pick up changes.
 
+In Firefox (140 or later), open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on** and pick `extension/manifest.json`. `npx web-ext lint --source-dir extension` checks the extension against Mozilla's rules.
+
 ## Project layout
 
 ```
 extension/            The extension itself (what ships to the Chrome Web Store)
-  manifest.json       Manifest V3: storage permission, content script on YouTube
+  manifest.json       Manifest V3: storage permission, content script on YouTube, Firefox ID
   content.js          Finds thumbnails and swaps in YouTube's auto-generated frames
   content.css         Crops the letterbox bars on 4:3 frames
   popup.html/.js      On/off switch and Early/Middle/Late choice

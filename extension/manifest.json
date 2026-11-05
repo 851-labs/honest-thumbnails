@@ -4,6 +4,16 @@
   "version": "1.0.0",
   "description": "Replaces YouTube's clickbait thumbnails with a real frame from the middle of the video.",
   "permissions": ["storage"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "honest-thumbnails@851labs",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["none"] }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
